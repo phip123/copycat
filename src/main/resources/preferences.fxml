@@ -21,7 +21,7 @@ fx:controller="org.phip123.copycat.view.preferences.PreferencesController">
    <children>
       <HBox prefHeight="39.0" prefWidth="300.0" spacing="10.0">
          <children>
-            <Button mnemonicParsing="false" text="Set default directory" />
+            <Button mnemonicParsing="false" text="Set default directory" onAction="#setDefaultDirectory" />
             <Label text="Label" />
          </children>
       </HBox>
