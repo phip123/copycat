@@ -19,6 +19,7 @@ public class DirectoryHelper {
         Node node = (Node) event.getSource();
         DirectoryChooser dirChooser = new DirectoryChooser();
         dirChooser.setTitle(title);
+        dirChooser.setInitialDirectory(UserPreferences.INSTANCE.getDefaultDirectory());
         File file = dirChooser.showDialog(node.getScene().getWindow());
         return file != null ? Optional.of(file) : Optional.<File>empty();
     }

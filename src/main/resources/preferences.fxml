@@ -2,16 +2,17 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="org.phip123.copycat.view.preferences.PreferencesController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.phip123.copycat.view.preferences.PreferencesController">
   <columnConstraints>
+    <ColumnConstraints />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -19,10 +20,11 @@ fx:controller="org.phip123.copycat.view.preferences.PreferencesController">
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <HBox prefHeight="39.0" prefWidth="300.0" spacing="10.0">
+      <HBox prefHeight="39.0" prefWidth="300.0" spacing="10.0" GridPane.columnIndex="1">
          <children>
-            <Button mnemonicParsing="false" text="Set default directory" onAction="#setDefaultDirectory" />
-            <Label text="Label" />
+            <Label text="Default Directory" />
+            <TextField fx:id="defaultDirTxt" />
+            <Button mnemonicParsing="false" onAction="#setDefaultDirectory" text="..." />
          </children>
       </HBox>
    </children>

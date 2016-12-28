@@ -6,10 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.phip123.copycat.copy.process.ProcessFactory;
 import org.phip123.copycat.copy.process.configuration.Configuration;
+import org.phip123.copycat.copy.result.Result;
+import org.phip123.copycat.util.DirectoryHelper;
 import org.phip123.copycat.view.preferences.PreferencesController;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 /**
@@ -25,6 +30,7 @@ public class MainController {
     private Scene scene;
 
     private Configuration config;
+    private ProcessFactory processFactory;
 
 
 
@@ -32,21 +38,25 @@ public class MainController {
 
     @FXML
     public void initialize() {
+        processFactory = new ProcessFactory();
         config = new Configuration();
     }
 
     @FXML
     public void setSource(ActionEvent actionEvent) {
-
+        Optional<File> file = DirectoryHelper.showDirectoryChooser(actionEvent,"Set Source");
+        file.ifPresent(f -> config.setSource(f.getAbsolutePath()));
     }
 
     @FXML
     public void setDestination(ActionEvent actionEvent) {
+        Optional<File> file = DirectoryHelper.showDirectoryChooser(actionEvent,"Set Destination");
+        file.ifPresent(f -> config.setSource(f.getAbsolutePath()));
     }
 
     @FXML
     public void copy(ActionEvent actionEvent) {
-
+        Result result = this.processFactory.newNormalProcess(this.config).start();
     }
 
     public void openPreferences(ActionEvent event) {

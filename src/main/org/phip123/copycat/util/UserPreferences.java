@@ -1,6 +1,7 @@
 package org.phip123.copycat.util;
 
 import java.io.File;
+import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 
 /**
@@ -9,8 +10,9 @@ import java.util.prefs.Preferences;
 public enum UserPreferences {
 
     INSTANCE;
+    private final static Logger log = Logger.getLogger(UserPreferences.class.getSimpleName());
     private final static String KEY_DIRECTORY = "default_dir";
-    private final static String DEFAULT_DIR = "";
+    private final static String DEFAULT_DIR = System.getProperty("user.home");
 
     private Preferences preferences;
 
@@ -18,11 +20,12 @@ public enum UserPreferences {
         this.preferences = Preferences.userRoot();
     }
 
-    public String getDefaultDirectory() {
-        return this.preferences.get(KEY_DIRECTORY,DEFAULT_DIR);
+    public File getDefaultDirectory() {
+        return new File(this.preferences.get(KEY_DIRECTORY,DEFAULT_DIR));
     }
 
     public void setDefaultDirectory(File defaultDirectory) {
         this.preferences.put(KEY_DIRECTORY,defaultDirectory.getAbsolutePath());
     }
+
 }

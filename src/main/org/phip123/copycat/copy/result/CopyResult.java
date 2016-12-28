@@ -1,7 +1,18 @@
 package org.phip123.copycat.copy.result;
 
 /**
- * Created by phip123 on 24.12.2016.
+ * Represents the result of a copyprocess
  */
-public class CopyResult {
+public class CopyResult implements Result{
+
+    private final ResultType type;
+
+    CopyResult(ResultType type) {
+            this.type = type;
+    }
+
+    @Override
+    public ResultType getResultType() {
+        return type;
+    }
 }

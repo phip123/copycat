@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.phip123.copycat.util.DirectoryHelper;
 import org.phip123.copycat.util.UserPreferences;
@@ -22,20 +23,26 @@ public class PreferencesController {
 
     private Stage stage;
 
+    @FXML
+    private TextField defaultDirTxt;
+
 
     public PreferencesController () {}
 
     @FXML
     public void initialize () {
-
+        defaultDirTxt.setText(UserPreferences.INSTANCE.getDefaultDirectory().getAbsolutePath());
     }
 
     @FXML
     public void setDefaultDirectory(ActionEvent actionEvent) {
         Optional<File> dir = DirectoryHelper.showDirectoryChooser(actionEvent,"Pick default directory");
-        dir.ifPresent(UserPreferences.INSTANCE::setDefaultDirectory);
+        dir.ifPresent(this::setDefault);
+    }
 
-        log.info("Set default dir to : " + dir.orElse(new File(UserPreferences.INSTANCE.getDefaultDirectory())).getAbsolutePath());
+    private void setDefault(File file) {
+        UserPreferences.INSTANCE.setDefaultDirectory(file);
+        this.defaultDirTxt.setText(file.getAbsolutePath());
     }
 
     public void launchPrefScreen(Stage stage) {
