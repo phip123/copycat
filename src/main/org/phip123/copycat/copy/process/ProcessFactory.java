@@ -8,7 +8,7 @@ import org.phip123.copycat.copy.process.configuration.Configuration;
 public class ProcessFactory {
 
 
-    public CopyProcess newNormalProcess(Configuration config) {
-        return new NormalCopyProcess(config.getSource(),config.getDestination());
+    public Process newLocalProcess(Configuration config) {
+        return new LocalProcess(config.getSource(),config.getDestination());
     }
 }

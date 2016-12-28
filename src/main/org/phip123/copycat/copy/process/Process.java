@@ -5,7 +5,7 @@ import org.phip123.copycat.copy.result.Result;
 /**
  * Created by phip123 on 24.12.2016.
  */
-public interface CopyProcess {
+public interface Process {
 
     /**
      * Copies everything from source to destination.

@@ -8,7 +8,7 @@ public interface Result {
     ResultType getResultType();
 
     static Result emptyCopyResult() {
-        return new CopyResult(ResultType.EMPTY);
+        return new LocalResult(ResultType.EMPTY);
     }
 
 }

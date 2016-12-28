@@ -1,26 +1,17 @@
 package org.phip123.copycat.copy.process.configuration;
 
 /**
- * Created by phip123 on 24.12.2016.
+ * Created by phip123 on 28.12.2016.
  */
-public class Configuration {
+public interface Configuration {
 
-    private String source;
-    private String destination;
+    void setSource(String source);
+    String getSource();
+    void setDestination(String destination);
+    String getDestination();
 
-    public String getSource() {
-        return source;
-    }
 
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
+    static LocalConfiguration newLocalConfig() {
+        return new LocalConfiguration();
     }
 }

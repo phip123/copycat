@@ -39,7 +39,7 @@ public class MainController {
     @FXML
     public void initialize() {
         processFactory = new ProcessFactory();
-        config = new Configuration();
+        config = Configuration.newLocalConfig();
     }
 
     @FXML
@@ -56,7 +56,7 @@ public class MainController {
 
     @FXML
     public void copy(ActionEvent actionEvent) {
-        Result result = this.processFactory.newNormalProcess(this.config).start();
+        Result result = this.processFactory.newLocalProcess(this.config).start();
     }
 
     public void openPreferences(ActionEvent event) {
