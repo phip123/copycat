@@ -3,7 +3,7 @@ package org.phip123.copycat.copy.process;
 import org.phip123.copycat.copy.result.Result;
 
 /**
- * Is used to copy files. Must be on the local drive. Is immutable
+ * This class is used to copy files. Instances are immutable
  */
 class LocalProcess implements Process {
 
@@ -15,7 +15,12 @@ class LocalProcess implements Process {
         this.destination = destination;
     }
 
+    /**
+     * Starts the copy process. The source and destination folder must be local
+     * @return the result of the process
+     */
+    @Override
     public Result start() {
-        return Result.emptyCopyResult();
+        return Result.getEmptyCopyResult();
     }
 }

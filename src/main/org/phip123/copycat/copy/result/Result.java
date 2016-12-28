@@ -7,7 +7,7 @@ public interface Result {
 
     ResultType getResultType();
 
-    static Result emptyCopyResult() {
+    static Result getEmptyCopyResult() {
         return new LocalResult(ResultType.EMPTY);
     }
 

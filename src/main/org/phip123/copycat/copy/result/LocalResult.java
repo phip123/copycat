@@ -3,7 +3,7 @@ package org.phip123.copycat.copy.result;
 /**
  * Represents the result of a copyprocess
  */
-public class LocalResult implements Result{
+class LocalResult implements Result{
 
     private final ResultType type;
 

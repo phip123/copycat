@@ -11,7 +11,7 @@ public interface Configuration {
     String getDestination();
 
 
-    static LocalConfiguration newLocalConfig() {
+    static LocalConfiguration getLocalConfig() {
         return new LocalConfiguration();
     }
 }

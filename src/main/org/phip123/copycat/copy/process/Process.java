@@ -1,5 +1,6 @@
 package org.phip123.copycat.copy.process;
 
+import org.phip123.copycat.copy.process.configuration.Configuration;
 import org.phip123.copycat.copy.result.Result;
 
 /**
@@ -14,5 +15,12 @@ public interface Process {
      * @return information about the process
      */
     Result start ();
+
+    static LocalProcess newLocalProcess(Configuration configuration) {
+        if (configuration.getSource() == null || configuration.getDestination() == null) {
+            throw new IllegalArgumentException("Both folders must not be empty");
+        }
+        return new LocalProcess(configuration.getSource(),configuration.getDestination());
+    }
 
 }

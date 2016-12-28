@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.phip123.copycat.copy.process.ProcessFactory;
+import org.phip123.copycat.copy.process.Process;
 import org.phip123.copycat.copy.process.configuration.Configuration;
 import org.phip123.copycat.copy.result.Result;
 import org.phip123.copycat.util.DirectoryHelper;
@@ -30,7 +30,6 @@ public class MainController {
     private Scene scene;
 
     private Configuration config;
-    private ProcessFactory processFactory;
 
 
 
@@ -38,8 +37,7 @@ public class MainController {
 
     @FXML
     public void initialize() {
-        processFactory = new ProcessFactory();
-        config = Configuration.newLocalConfig();
+        config = Configuration.getLocalConfig();
     }
 
     @FXML
@@ -56,7 +54,28 @@ public class MainController {
 
     @FXML
     public void copy(ActionEvent actionEvent) {
-        Result result = this.processFactory.newLocalProcess(this.config).start();
+        try {
+            Process process = Process.newLocalProcess(config);
+            handleResult(process.start());
+        } catch (IllegalArgumentException ex) {
+            handleException(ex);
+            log.warning("User wanted to copy but folders were empty");
+        }
+    }
+
+    private void handleException(IllegalArgumentException ex) {
+        //show error
+    }
+
+    private void handleResult(Result result) {
+        switch (result.getResultType()) {
+            case SUCCESS:
+                break;
+            case FAILURE:
+                break;
+            case EMPTY:
+                break;
+        }
     }
 
     public void openPreferences(ActionEvent event) {
