@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 /**
  * Created by phip123 on 24.12.2016.
  */
-public class MainController {
+public final class MainController {
 
 
     private final static Logger log = Logger.getLogger(MainController.class.getSimpleName());
@@ -32,11 +32,11 @@ public class MainController {
     private Configuration config;
 
 
-
     public MainController() {}
 
     @FXML
     public void initialize() {
+        log.info("init");
         config = Configuration.getLocalConfig();
     }
 
@@ -49,14 +49,16 @@ public class MainController {
     @FXML
     public void setDestination(ActionEvent actionEvent) {
         Optional<File> file = DirectoryHelper.showDirectoryChooser(actionEvent,"Set Destination");
-        file.ifPresent(f -> config.setSource(f.getAbsolutePath()));
+        file.ifPresent(f -> config.setDestination(f.getAbsolutePath()));
     }
 
     @FXML
     public void copy(ActionEvent actionEvent) {
         try {
+            this.config = getTestConfig();
             Process process = Process.newLocalProcess(config);
             handleResult(process.start());
+            config = Configuration.getLocalConfig();
         } catch (IllegalArgumentException ex) {
             handleException(ex);
             log.warning("User wanted to copy but folders were empty");
@@ -73,7 +75,7 @@ public class MainController {
                 break;
             case FAILURE:
                 break;
-            case EMPTY:
+            case EMPTY:log.info("Empty");
                 break;
         }
     }
@@ -96,4 +98,12 @@ public class MainController {
         }
     }
 
+    public Configuration getTestConfig() {
+        String source = "/home/philipp/Documents/Test1/";
+        String dest = "/home/philipp/Documents/Test2/";
+        Configuration config = Configuration.getLocalConfig();
+        config.setSource(source);
+        config.setDestination(dest);
+        return config;
+    }
 }

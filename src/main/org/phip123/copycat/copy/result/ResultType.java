@@ -5,5 +5,5 @@ package org.phip123.copycat.copy.result;
  */
 public enum ResultType {
 
-    EMPTY, SUCCESS, FAILURE;
+    EMPTY, SUCCESS, FAILURE, ERROR;
 }

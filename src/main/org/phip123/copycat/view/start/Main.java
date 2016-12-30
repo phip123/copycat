@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 import java.util.logging.Logger;
 
-public class Main extends Application {
+public final class Main extends Application {
 
     private static final Logger log = Logger.getLogger(Main.class.getSimpleName());
 

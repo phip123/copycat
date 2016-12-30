@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 /**
  * Created by phip123 on 24.12.2016.
  */
-public class PreferencesController {
+public final class PreferencesController {
     private final static Logger log = Logger.getLogger(PreferencesController.class.getSimpleName());
 
     private Stage stage;
