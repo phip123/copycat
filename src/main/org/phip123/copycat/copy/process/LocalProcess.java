@@ -43,7 +43,7 @@ final class LocalProcess implements Process {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || o instanceof LocalProcess) return false;
+        if (o == null || !(o instanceof LocalProcess)) return false;
 
         LocalProcess that = (LocalProcess) o;
 
