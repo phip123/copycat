@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
@@ -31,13 +32,40 @@ final class LocalProcess implements Process {
     @Override
     public Result start() {
         log.info("Start " + this.toString());
-        try {
-            Files.walk(source.toPath()).forEach(p -> log.info(p.toString()));
-        } catch (IOException | SecurityException ex) {
-            log.warning("Error in copy process.\n" + ex.getMessage());
-            return Result.getExceptionResult(ex);
-        }
+
         return Result.getEmptyCopyResult();
+    }
+
+    /**
+     * Copies the whole directory {@code source} into the given destination {@code destination}
+     * @param source the source directory
+     * @param destination the destination directory
+     */
+    private Result copyDirectory(final Path source, final Path destination) {
+        //Files.walk(source)
+          //      .reduce(Result.getEmptyCopyResult(),(total,file) -> (copyFile(source,file,destination)  ?  : total));
+    }
+
+    /**
+     /**
+     * Copies the file {@code source} into the given destination directory {@code destination}
+     * @param source the file to copy
+     * @param destination the directory in which the file will be copied
+     * @return if any error happens this method will return false otherwise true
+     */
+    private boolean copyFile(Path source,Path file,Path destination) {
+        Path rel = source.relativize(file);
+        final Path finalDestination = source.resolve(rel);
+
+        if (rel.toString().length() > 0) {
+            try {
+                Files.copy(file, finalDestination);
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override

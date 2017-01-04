@@ -23,6 +23,7 @@ public class LocalProcessTest {
     private static final String CONTENT_DIR = ROOT + "content" + SEP;
     private static final Path SRC_PATH = Paths.get(SRC_TEST_DIR);
     private static final Path DEST_PATH = Paths.get(DEST_TEST_DIR);
+    private static final Path CONTENT_PATH = Paths.get(CONTENT_DIR);
 
 
     @BeforeAll
@@ -52,23 +53,25 @@ public class LocalProcessTest {
      * doesn't exist will throw an IllegalStateException
      */
     private static void copyTestContent() throws Exception{
-        Path src = Paths.get(SRC_TEST_DIR);
-        Path content = Paths.get(CONTENT_DIR);
 
-        if (!Files.isDirectory(content)) throw new IllegalStateException("No content to copy. Abort tests.");
-        if (Files.exists(src)) cleanDirectory(src);
+        if (!Files.isDirectory(CONTENT_PATH)) throw new IllegalStateException("No content to copy. Abort tests.");
+        if (Files.exists(SRC_PATH)) cleanDirectory(SRC_PATH);
 
-        Files.createDirectory(src);
+        Files.createDirectory(SRC_PATH);
 
-        Files.walk(content)
-                .forEach(file -> {
-                    try {
-                        Path rel = content.relativize(file);
-                        Files.copy(file, src.resolve(rel));
-                    } catch (IOException e) {
-                        log.warning("error copy \n" + e.getMessage());
-                    }
-                });
+        Files.walk(CONTENT_PATH)
+                .forEach(LocalProcessTest::copy);
+    }
+
+    private static void copy (Path file) {
+        try {
+            Path rel = CONTENT_PATH.relativize(file);
+            final Path finalDestination = SRC_PATH.resolve(rel);
+            if (rel.toString().length() > 0)
+                Files.copy(file, finalDestination);
+        } catch (IOException e) {
+            log.warning("error copy \n");
+        }
     }
 
     /**
